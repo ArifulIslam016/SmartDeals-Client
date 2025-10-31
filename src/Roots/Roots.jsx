@@ -7,7 +7,9 @@ const Roots = () => {
     return (
         <div>
         <Navbar></Navbar>
-        <Outlet></Outlet>
+       <div className='max-w-[1640px] mx-auto'>
+         <Outlet></Outlet>
+       </div>
         </div>
     );
 };

@@ -1,63 +1,21 @@
 import React, { use } from 'react';
+import ProductCard from '../ProductCard/ProductCard';
 
 const LatestProduct = ({LatesteProductPromise}) => {
     const LatestProductData=use(LatesteProductPromise)
     console.log(LatestProductData)
     return (
         <div>
-            
+            <h1 className="text-center text-6xl font-extrabold py-20">
+        Recent<span className="bg-gradient-to-r from-[#9F62F2] to-[#632EE3] bg-clip-text text-transparent"> Products </span>
+      </h1>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 '>
+            {
+                LatestProductData.map(singleProduct=><ProductCard key={singleProduct._id} Product={singleProduct}></ProductCard>)
+            }
+            </div>
         </div>
     );
 };
 
 export default LatestProduct;
-/**
- * category
-: 
-"Electronics"
-condition
-: 
-"used"
-created_at
-: 
-"2025-10-27T13:00:00.000Z"
-description
-: 
-"Dell XPS 13 with 11th Gen i7, 16GB RAM, 512GB SSD, like new."
-email
-: 
-"seller8@example.com"
-image
-: 
-"https://example.com/images/dellxps13.jpg"
-location
-: 
-"Dhaka"
-price_max
-: 
-115000
-price_min
-: 
-95000
-seller_contact
-: 
-"+8801788888888"
-seller_image
-: 
-"https://example.com/images/seller8.jpg"
-seller_name
-: 
-"Tanvir Alam"
-status
-: 
-"pending"
-title
-: 
-"Dell XPS 13"
-usage
-: 
-"8 months old"
-_id
-: 
-"654f1a000001000000000008"
- */
