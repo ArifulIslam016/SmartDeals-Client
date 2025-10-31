@@ -6,3 +6,7 @@
   --color-primary: blue;
   --color-secondary: teal;
 }
+
+.btn-primary {
+  @apply bg-gradient-to-r from-[#9F62F2] to-[#632EE3] text-white border-0 hover:opacity-90 transition;
+}

@@ -71,7 +71,7 @@ const Navbar = () => {
             Logout
           </button>
         ) : (
-          <Link to={"/login"} className="btn">
+          <Link to={"/login"} className="btn btn-primary">
             Login
           </Link>
         )}

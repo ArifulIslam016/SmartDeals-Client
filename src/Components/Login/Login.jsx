@@ -3,16 +3,29 @@ import { Link } from "react-router";
 import { Authcontext } from "../../Context/AuthContext";
 
 const Login = () => {
-    const{LoginWithGoogle}=use(Authcontext)
-    const handleSocialLogin=()=>{
-        LoginWithGoogle().then(result=>{
-            console.log(result)
-        }).catch(
-            err=>{
-                console.log(err)
-            }
-        )
-    }
+  const { LoginWithGoogle } = use(Authcontext);
+  const handleSocialLogin = () => {
+    LoginWithGoogle()
+      .then((result) => {
+        console.log(result);
+        const newUser={name:result.user.displayName,
+            email:result.user.email,
+            Image:result.user.photoURL,
+        }
+        fetch("http://localhost:3000/users",{
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+        body:JSON.stringify(newUser)
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="hero-content max-w-md mx-auto min-h-screen my-auto flex-col">
       <div className="text-center lg:text-left">
@@ -32,7 +45,10 @@ const Login = () => {
               <button className="btn btn-neutral mt-4">Login</button>
             </fieldset>
           </form>
-          <button onClick={handleSocialLogin} className="btn bg-white text-black border-[#e5e5e5]">
+          <button
+            onClick={handleSocialLogin}
+            className="btn bg-white text-black border-[#e5e5e5]"
+          >
             <svg
               aria-label="Google logo"
               width="16"
