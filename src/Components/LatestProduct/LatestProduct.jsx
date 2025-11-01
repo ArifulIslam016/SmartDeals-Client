@@ -3,7 +3,6 @@ import ProductCard from '../ProductCard/ProductCard';
 
 const LatestProduct = ({LatesteProductPromise}) => {
     const LatestProductData=use(LatesteProductPromise)
-    console.log(LatestProductData)
     return (
         <div>
             <h1 className="text-center text-6xl font-extrabold py-20">
