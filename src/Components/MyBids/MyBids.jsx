@@ -47,16 +47,14 @@ const MyBids = () => {
                       </div>
                       <div>
                         <div className="font-bold">{Bid.buyer_name} </div>
-                        {/* <div className="text-sm opacity-50">United States</div> */}
+                     
                       </div>
                     </div>
                   </td>
                   <td>
                     {Bid.buyer_email}
                     <br />
-                    {/* <span className="badge badge-ghost badge-sm">
-                      Desktop Support Technician
-                    </span> */}
+                   
                   </td>
                   <td>{Bid.bid_price}</td>
                   <th>
