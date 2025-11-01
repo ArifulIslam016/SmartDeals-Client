@@ -25,7 +25,7 @@ const Login = () => {
       .catch((err) => {
         console.log(err);
       });
-  };
+  }; 
   return (
     <div className="hero-content max-w-md mx-auto min-h-screen my-auto flex-col">
       <div className="text-center lg:text-left">

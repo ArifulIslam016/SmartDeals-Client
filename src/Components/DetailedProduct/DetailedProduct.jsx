@@ -16,6 +16,7 @@ const DetailedProduct = () => {
         setBids(data);
       });
   }, [productData]);
+  
   if (!user) {
     return <h1>Loading....</h1>;
   }
