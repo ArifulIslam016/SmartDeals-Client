@@ -1,23 +1,61 @@
 import React, { use, useEffect, useState } from "react";
 import { Authcontext } from "../../Context/AuthContext";
+import Swal from "sweetalert2";
 
 const MyBids = () => {
-  const { user } = use(Authcontext);
-  const [Bids,setBids]=useState([])
+  const { user,isLoading } = use(Authcontext);
+  
+  const [Bids, setBids] = useState([]);
   useEffect(() => {
     if (!user) {
-      return 
+      return;
     }
-    fetch(`http://localhost:3000/bids?email=${user.email}`).then((res) =>
-      res.json()
-    ).then(data=>setBids(data))
+    fetch(`http://localhost:3000/bids?email=${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setBids(data));
   }, [user]);
 
-
+  const handleRemoveBids = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    })
+     .then((result) => {
+      if (result.isConfirmed) {
+       fetch(`http://localhost:3000/bids/${id}`,{
+      method:"DELETE"
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if(data.deletedCount){
+             Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        })
+        const remainingBids=Bids.filter(Bid=>Bid._id!==id)
+        setBids(remainingBids)
+        }
+      });
+      }
+    });
+  };
+ if(isLoading){
+    return
+  }
   return (
     <div>
+         {/* <img
+                              src={`${user.photoURL}`}
+                              alt="Avatar Tailwind CSS Component"
+                            /> */}
       <h1>My total bids: {Bids.length}</h1>
-         <div>
+      <div>
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
@@ -33,34 +71,39 @@ const MyBids = () => {
             <tbody>
               {/* row 1 */}
               {Bids.map((Bid, index) => {
-              return  <tr key={Bid._id}>
-                  <th>{index + 1}</th>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
-                          <img
-                            src={`${user?.photoURL}`}
-                            alt="Avatar Tailwind CSS Component"
-                          />
+                return (
+                  <tr key={Bid._id}>
+                    <th>{index + 1}</th>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle h-12 w-12">
+                            <img
+                              src={`${user.photoURL}`}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-bold">{Bid.buyer_name} </div>
                         </div>
                       </div>
-                      <div>
-                        <div className="font-bold">{Bid.buyer_name} </div>
-                     
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    {Bid.buyer_email}
-                    <br />
-                   
-                  </td>
-                  <td>{Bid.bid_price}</td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
-                  </th>
-                </tr>;
+                    </td>
+                    <td>
+                      {Bid.buyer_email}
+                      <br />
+                    </td>
+                    <td>{Bid.bid_price}</td>
+                    <th>
+                      <button
+                        onClick={() => handleRemoveBids(Bid._id)}
+                        className="btn btn-outline text-red-500 btn-xs"
+                      >
+                        Delete Bids
+                      </button>
+                    </th>
+                  </tr>
+                );
               })}
             </tbody>
           </table>

@@ -140,7 +140,7 @@ const DetailedProduct = () => {
             <tbody>
               {/* row 1 */}
               {Bids.map((Bid, index) => {
-              return  <tr>
+              return  <tr key={Bid._id}>
                   <th>{index + 1}</th>
                   <td>
                     <div className="flex items-center gap-3">
