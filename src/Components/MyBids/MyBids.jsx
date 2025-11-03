@@ -4,17 +4,21 @@ import Swal from "sweetalert2";
 
 const MyBids = () => {
   const { user,isLoading } = use(Authcontext);
-  
+  // console.log(user)
   const [Bids, setBids] = useState([]);
   useEffect(() => {
     if (!user) {
       return;
     }
-    fetch(`http://localhost:3000/bids?email=${user.email}`)
+    fetch(`http://localhost:3000/bids?email=${user.email}`,{
+      headers:{
+        authorization:`Bearer ${user.accessToken}`
+      }
+    })
       .then((res) => res.json())
       .then((data) => setBids(data));
   }, [user]);
-
+ 
   const handleRemoveBids = (id) => {
     Swal.fire({
       title: "Are you sure?",
