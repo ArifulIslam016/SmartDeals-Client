@@ -54,7 +54,9 @@ export const router = createBrowserRouter([
           fetch(`http://localhost:3000/products/${params.id}`).then((res) =>
             res.json()
           ),
-        Component: DetailedProduct,
+        element: <PrivateProvider>
+            <DetailedProduct></DetailedProduct>
+        </PrivateProvider>
       },
     ],
   },

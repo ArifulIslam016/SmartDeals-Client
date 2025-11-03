@@ -10,7 +10,9 @@ const DetailedProduct = () => {
   const { image, _id, price_min, price_max, title } = productData;
   const modalRef = useRef();
   useEffect(() => {
-    fetch(`http://localhost:3000/products/bids/${_id}`)
+    fetch(`http://localhost:3000/products/bids/${_id}`,{
+      headers:{ authorization:`Bearer ${user.accessToken}`}
+    })
       .then((res) => res.json())
       .then((data) => {
         setBids(data);
