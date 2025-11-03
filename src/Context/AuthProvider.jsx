@@ -9,11 +9,11 @@ const AuthProvider = ({children}) => {
     const [user,setUser]=useState(null)
 
     const createUser=(email,password)=>{
-        true
+        setIsLoading(true)
     return createUserWithEmailAndPassword(auth,email,password)
     }
     const LoginUser=(email,password)=>{
-        true
+         setIsLoading(true)
        return signInWithEmailAndPassword(auth,email,password)
     }
     const LoginWithGoogle=()=>{

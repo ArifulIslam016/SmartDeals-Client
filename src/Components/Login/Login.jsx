@@ -1,13 +1,15 @@
 import React, { use } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { Authcontext } from "../../Context/AuthContext";
 
 const Login = () => {
   const { LoginWithGoogle } = use(Authcontext);
+  const location=useLocation()
+  const navigate=useNavigate()
   const handleSocialLogin = () => {
     LoginWithGoogle()
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         const newUser={name:result.user.displayName,
             email:result.user.email,
             Image:result.user.photoURL,
@@ -21,11 +23,13 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => console.log(data));
+          navigate(location?.state||'/')
       })
       .catch((err) => {
         console.log(err);
       });
   }; 
+  console.log(location)
   return (
     <div className="hero-content max-w-md mx-auto min-h-screen my-auto flex-col">
       <div className="text-center lg:text-left">
