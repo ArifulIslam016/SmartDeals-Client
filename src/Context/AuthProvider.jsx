@@ -25,6 +25,16 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
         const unsubscribe=onAuthStateChanged(auth,(currentUser)=>{
             setUser(currentUser)
+            if(currentUser){
+                fetch('http://localhost:3000/token',{
+                    method:"POST",
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify({email:currentUser.email})
+
+                }).then(res=>res.json()).then(data=>console.log("data of custom token in client",data))
+            }
             setIsLoading(false)
         })
         return ()=>{
