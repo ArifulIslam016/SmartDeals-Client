@@ -1,6 +1,7 @@
 import React, { use, useEffect, useState } from "react";
 import { Authcontext } from "../../Context/AuthContext";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const MyBids = () => {
   const { user,isLoading } = use(Authcontext);
@@ -10,14 +11,23 @@ const MyBids = () => {
     if (!user) {
       return;
     }
-    fetch(`http://localhost:3000/bids?email=${user.email}`,{
-      headers:{
+   axios.get(`http://localhost:3000/bids?email=${user.email}`,{ headers:{
         authorization:`Bearer ${user.accessToken}`
-      }
-    })
-      .then((res) => res.json())
-      .then((data) => setBids(data));
+      }}).then((data) => setBids(data.data))
   }, [user]);
+ 
+  // useEffect(() => {
+  //   if (!user) {
+  //     return;
+  //   }
+  //   fetch(`http://localhost:3000/bids?email=${user.email}`,{
+  //     headers:{
+  //       authorization:`Bearer ${user.accessToken}`
+  //     }
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => setBids(data));
+  // }, [user]);
  
   const handleRemoveBids = (id) => {
     Swal.fire({

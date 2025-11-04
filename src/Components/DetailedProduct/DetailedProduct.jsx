@@ -2,6 +2,7 @@ import React, { use, useEffect, useRef, useState } from "react";
 import { useLoaderData } from "react-router";
 import { Authcontext } from "../../Context/AuthContext";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const DetailedProduct = () => {
   const productData = useLoaderData();
@@ -10,15 +11,23 @@ const DetailedProduct = () => {
   const { image, _id, price_min, price_max, title } = productData;
   const modalRef = useRef();
   useEffect(() => {
-    fetch(`http://localhost:3000/products/bids/${_id}`,{
-      headers:{ authorization:`Bearer ${user.accessToken}`}
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setBids(data);
-      });
+    axios.get(`http://localhost:3000/products/bids/${_id}`,{ headers:{ authorization:`Bearer ${user.accessToken}`}}).then((data) =>
+      setBids(data.data)
+    );
   }, [productData]);
-  
+ 
+  // useEffect(() => {
+   
+  //   fetch(`http://localhost:3000/products/bids/${_id}`,{
+  //     headers:{ authorization:`Bearer ${user.accessToken}`}
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setBids(data);
+  //       console.log(data)
+  //     });
+  // }, [productData]);
+
   if (!user) {
     return <h1>Loading....</h1>;
   }
@@ -60,9 +69,11 @@ const DetailedProduct = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          newBid._id=data.insertedId;
+          newBid._id = data.insertedId;
           // const newAddesBids=[...]
-          setBids(prev=>[...prev,newBid].sort((a,b)=>b.bid_price-a.bid_price))
+          setBids((prev) =>
+            [...prev, newBid].sort((a, b) => b.bid_price - a.bid_price)
+          );
         }
       });
   };
@@ -142,36 +153,38 @@ const DetailedProduct = () => {
             <tbody>
               {/* row 1 */}
               {Bids.map((Bid, index) => {
-              return  <tr key={Bid._id}>
-                  <th>{index + 1}</th>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
-                          <img
-                            src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                            alt="Avatar Tailwind CSS Component"
-                          />
+                return (
+                  <tr key={Bid._id}>
+                    <th>{index + 1}</th>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle h-12 w-12">
+                            <img
+                              src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-bold">{Bid.buyer_name} </div>
+                          {/* <div className="text-sm opacity-50">United States</div> */}
                         </div>
                       </div>
-                      <div>
-                        <div className="font-bold">{Bid.buyer_name} </div>
-                        {/* <div className="text-sm opacity-50">United States</div> */}
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    {Bid.buyer_email}
-                    <br />
-                    {/* <span className="badge badge-ghost badge-sm">
+                    </td>
+                    <td>
+                      {Bid.buyer_email}
+                      <br />
+                      {/* <span className="badge badge-ghost badge-sm">
                       Desktop Support Technician
                     </span> */}
-                  </td>
-                  <td>{Bid.bid_price}</td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
-                  </th>
-                </tr>;
+                    </td>
+                    <td>{Bid.bid_price}</td>
+                    <th>
+                      <button className="btn btn-ghost btn-xs">details</button>
+                    </th>
+                  </tr>
+                );
               })}
             </tbody>
           </table>
