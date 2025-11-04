@@ -17,7 +17,10 @@ const Navbar = () => {
             My products
           </NavLink>
           <NavLink className="mr-3" to={"/mybids"}>
-            My Bids{" "}
+            My Bids
+          </NavLink>
+          <NavLink className="mr-3" to={"/createproducts"}>
+            Create A Product
           </NavLink>
         </>
       ) : (

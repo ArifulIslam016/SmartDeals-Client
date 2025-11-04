@@ -9,6 +9,7 @@ import MyBids from "../Components/MyBids/MyBids";
 import DetailedProduct from "../Components/DetailedProduct/DetailedProduct";
 import MyProducts from "../Components/MyProducts/MyProducts";
 import PrivateProvider from "../PrivateRoute/PrivateProvider";
+import CreateAProduct from "../Components/CreateAProduct/CreateAProduct";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,9 @@ export const router = createBrowserRouter([
             <DetailedProduct></DetailedProduct>
         </PrivateProvider>
       },
+      {path:'createproducts',
+        element: <PrivateProvider><CreateAProduct></CreateAProduct></PrivateProvider>
+      }
     ],
   },
 ]);
