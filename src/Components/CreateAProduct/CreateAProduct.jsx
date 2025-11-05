@@ -32,7 +32,7 @@ const CreateAProduct = () => {
 
       // inastance.post('/products',{newProduct}).then(data=>console.log(data))
     // axios
-    //   .post("http://localhost:3000/products", newProduct)
+    //   .post("https://smartdeals-api-server.vercel.app/products", newProduct)
     //   .then((data) => {
     //     if(data?.data?.insertedId){
     //        Swal.fire({

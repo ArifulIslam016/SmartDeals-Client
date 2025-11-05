@@ -2,7 +2,7 @@ import React from 'react';
 import Banner from '../Banner/Banner';
 import LatestProduct from '../LatestProduct/LatestProduct';
 
-const LatesteProductPromise=fetch('http://localhost:3000/latest-product').then(res=>res.json())
+const LatesteProductPromise=fetch('https://smartdeals-api-server.vercel.app/latest-product').then(res=>res.json())
 
 const Home = () => {
     return (

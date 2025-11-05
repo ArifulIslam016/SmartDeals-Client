@@ -26,7 +26,7 @@ const AuthProvider = ({children}) => {
         const unsubscribe=onAuthStateChanged(auth,(currentUser)=>{
             setUser(currentUser)
             if(currentUser){
-                fetch('http://localhost:3000/token',{
+                fetch('https://smartdeals-api-server.vercel.app/token',{
                     method:"POST",
                     headers:{
                         "Content-Type":"application/json"

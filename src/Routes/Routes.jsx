@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
       {
         path: "/product-details/:id",
         loader: async({ params }) =>
-         await fetch(`http://localhost:3000/products/${params.id}`).then((res) =>
+         await fetch(`https://smartdeals-api-server.vercel.app/products/${params.id}`).then((res) =>
             res.json()
           ),
         element: <PrivateProvider>

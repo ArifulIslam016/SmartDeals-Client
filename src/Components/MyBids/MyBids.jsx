@@ -19,7 +19,7 @@ const MyBids = () => {
   //   if (!user) {
   //     return;
   //   }
-  //  axios.get(`http://localhost:3000/bids?email=${user.email}`,{ headers:{
+  //  axios.get(`https://smartdeals-api-server.vercel.app/bids?email=${user.email}`,{ headers:{
   //       authorization:`Bearer ${user.accessToken}`
   //     }}).then((data) => setBids(data.data))
   // }, [user]);
@@ -28,7 +28,7 @@ const MyBids = () => {
   //   if (!user) {
   //     return;
   //   }
-  //   fetch(`http://localhost:3000/bids?email=${user.email}`,{
+  //   fetch(`https://smartdeals-api-server.vercel.app/bids?email=${user.email}`,{
   //     headers:{
   //       authorization:`Bearer ${user.accessToken}`
   //     }
@@ -49,7 +49,7 @@ const MyBids = () => {
     })
      .then((result) => {
       if (result.isConfirmed) {
-       fetch(`http://localhost:3000/bids/${id}`,{
+       fetch(`https://smartdeals-api-server.vercel.app/bids/${id}`,{
       method:"DELETE"
     })
       .then((res) => res.json())

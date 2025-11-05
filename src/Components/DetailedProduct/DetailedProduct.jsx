@@ -11,14 +11,14 @@ const DetailedProduct = () => {
   const { image, _id, price_min, price_max, title } = productData;
   const modalRef = useRef();
   useEffect(() => {
-    axios.get(`http://localhost:3000/products/bids/${_id}`,{ headers:{ authorization:`Bearer ${user.accessToken}`}}).then((data) =>
+    axios.get(`https://smartdeals-api-server.vercel.app/products/bids/${_id}`,{ headers:{ authorization:`Bearer ${user.accessToken}`}}).then((data) =>
       setBids(data.data)
     );
   }, [productData]);
  
   // useEffect(() => {
    
-  //   fetch(`http://localhost:3000/products/bids/${_id}`,{
+  //   fetch(`https://smartdeals-api-server.vercel.app/products/bids/${_id}`,{
   //     headers:{ authorization:`Bearer ${user.accessToken}`}
   //   })
   //     .then((res) => res.json())
@@ -50,7 +50,7 @@ const DetailedProduct = () => {
       status: "pending",
       buyer_image: user?.photoUrl ? user.photoUrl : "",
     };
-    fetch("http://localhost:3000/bids", {
+    fetch("https://smartdeals-api-server.vercel.app/bids", {
       method: "Post",
       headers: {
         "Content-Type": "application/json",
