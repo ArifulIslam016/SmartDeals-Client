@@ -2,18 +2,18 @@ import React, { use, useEffect, useState } from "react";
 import { Authcontext } from "../../Context/AuthContext";
 import Swal from "sweetalert2";
 import axios from "axios";
+import useSecureInstance from "../../Hooks/SecureInstance";
 
 const MyBids = () => {
   const { user,isLoading } = use(Authcontext);
   // console.log(user)
   const [Bids, setBids] = useState([]);
+  const secureInstance=useSecureInstance()
   useEffect(() => {
     if (!user) {
       return;
     }
-   axios.get(`http://localhost:3000/bids?email=${user.email}`,{ headers:{
-        authorization:`Bearer ${user.accessToken}`
-      }}).then((data) => setBids(data.data))
+   secureInstance.get(`bids?email=${user.email}`).then(data=>setBids(data.data))
   }, [user]);
   // useEffect(() => {
   //   if (!user) {
