@@ -2,13 +2,14 @@ import React from "react";
 import useAuthHook from "../../Hooks/AuthHooks";
 import axios from "axios";
 import Swal from "sweetalert2";
-import useAxiosInstance from "../../Hooks/AxiosInstance";
+// import useAxiosInstance from "../../Hooks/AxiosInstance";
 import { data } from "react-router";
+import useSecureInstance from "../../Hooks/SecureInstance";
 
 const CreateAProduct = () => {
   const { user } = useAuthHook();
-  const inastance=useAxiosInstance()
-  console.log(user);
+  const securedInstanse=useSecureInstance()
+  // const inastance=useAxiosInstance()
   const handleCreateProduct = (e) => {
     e.preventDefault();
     const title = e.target.title.value;
@@ -27,7 +28,9 @@ const CreateAProduct = () => {
       seller_image,
       email,
     };
-      inastance.post('/products',{newProduct}).then()
+    securedInstanse.post('/products',{newProduct}).then(data=>console.log(data))
+
+      // inastance.post('/products',{newProduct}).then(data=>console.log(data))
     // axios
     //   .post("http://localhost:3000/products", newProduct)
     //   .then((data) => {
