@@ -2,9 +2,12 @@ import React from "react";
 import useAuthHook from "../../Hooks/AuthHooks";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useAxiosInstance from "../../Hooks/AxiosInstance";
+import { data } from "react-router";
 
 const CreateAProduct = () => {
   const { user } = useAuthHook();
+  const inastance=useAxiosInstance()
   console.log(user);
   const handleCreateProduct = (e) => {
     e.preventDefault();
@@ -24,19 +27,20 @@ const CreateAProduct = () => {
       seller_image,
       email,
     };
-    axios
-      .post("http://localhost:3000/products", newProduct)
-      .then((data) => {
-        if(data?.data?.insertedId){
-           Swal.fire({
-                       position: "center",
-                       icon: "success",
-                       title: "Your products has been added",
-                       showConfirmButton: false,
-                       timer: 1500,
-                     });
-        }
-      });
+      inastance.post('/products',{newProduct}).then()
+    // axios
+    //   .post("http://localhost:3000/products", newProduct)
+    //   .then((data) => {
+    //     if(data?.data?.insertedId){
+    //        Swal.fire({
+    //                    position: "center",
+    //                    icon: "success",
+    //                    title: "Your products has been added",
+    //                    showConfirmButton: false,
+    //                    timer: 1500,
+    //                  });
+    //     }
+    //   });
   };
   return (
     <div className="flex justify-center min-h-screen items-center">
