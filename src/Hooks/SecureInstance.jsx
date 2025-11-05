@@ -7,7 +7,7 @@ const instance=axios.create({
 const useSecureInstance=()=>{
     const {user}=useAuthHook()
      instance.interceptors.request.use( (config)=>{
-        config.authorization=`Bearar ${user.accessToken}`
+        config.headers.authorization=`Bearar ${user.accessToken}`
         console.log(config)
         return config
     })

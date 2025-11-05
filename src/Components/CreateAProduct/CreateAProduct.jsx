@@ -28,7 +28,7 @@ const CreateAProduct = () => {
       seller_image,
       email,
     };
-    securedInstanse.post('/products',{newProduct}).then(data=>console.log(data))
+    securedInstanse.post('/products',{newProduct}).then(data=>console.log(data.data))
 
       // inastance.post('/products',{newProduct}).then(data=>console.log(data))
     // axios

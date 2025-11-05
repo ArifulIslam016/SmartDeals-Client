@@ -33,7 +33,7 @@ const AuthProvider = ({children}) => {
                     },
                     body:JSON.stringify({email:currentUser.email})
 
-                }).then(res=>res.json()).then(data=>console.log("data of custom token in client",data))
+                }).then(res=>res.json()).then(s)
             }
             setIsLoading(false)
         })
