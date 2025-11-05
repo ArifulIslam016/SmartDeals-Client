@@ -33,7 +33,7 @@ const AuthProvider = ({children}) => {
                     },
                     body:JSON.stringify({email:currentUser.email})
 
-                }).then(res=>res.json()).then(s)
+                }).then(res=>res.json()).then()
             }
             setIsLoading(false)
         })
