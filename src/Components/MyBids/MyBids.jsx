@@ -15,6 +15,14 @@ const MyBids = () => {
         authorization:`Bearer ${user.accessToken}`
       }}).then((data) => setBids(data.data))
   }, [user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     return;
+  //   }
+  //  axios.get(`http://localhost:3000/bids?email=${user.email}`,{ headers:{
+  //       authorization:`Bearer ${user.accessToken}`
+  //     }}).then((data) => setBids(data.data))
+  // }, [user]);
  
   // useEffect(() => {
   //   if (!user) {
