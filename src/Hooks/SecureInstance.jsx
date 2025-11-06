@@ -1,6 +1,6 @@
 import axios, { Axios } from "axios";
 import useAuthHook from "./AuthHooks";
-import { use, useEffect } from "react";
+import {  useEffect } from "react";
 import { useNavigate } from "react-router";
 
 const instance = axios.create({
