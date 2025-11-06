@@ -1,6 +1,5 @@
 import React from "react";
 import useAuthHook from "../../Hooks/AuthHooks";
-import axios from "axios";
 import Swal from "sweetalert2";
 // import useAxiosInstance from "../../Hooks/AxiosInstance";
 import { data } from "react-router";
